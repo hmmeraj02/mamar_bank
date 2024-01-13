@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 import environ
 env = environ.Env()
 environ.Env.read_env()
@@ -94,15 +95,25 @@ environ.Env.read_env()
 # Your secret key
 SECRET_KEY = env("SECRET_KEY")
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgres://mamarbank_7109_user:xcEnoPAYph8PW1Vkv7PA1xhWpWADi4nb@dpg-cmhb1j6n7f5s739qrfr0-a.oregon-postgres.render.com/mamarbank_7109',
+    )
 }
 
 
